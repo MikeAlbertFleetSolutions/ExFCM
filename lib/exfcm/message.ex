@@ -25,16 +25,32 @@ defmodule ExFCM.Message do
   @url Application.get_env(:exfcm, :fcm_url, "")
   @server_key Application.get_env(:exfcm, :server_key, "")
 
-  defmodule Notification do
-    defstruct title: nil, body: nil
+#  defmodule Notification do
+#    defstruct title: nil, body: nil
+#  end
+
+  @doc """
+  Puts a Notification inside message. It will be displayed in tray when app is in background.
+  """
+
+#  def put_notification(message \\ %__MODULE__{}, title, data) do
+#    notification = %Notification{ title: title, body: data}
+#    %__MODULE__{message | notification: notification}
+#  end
+
+  @doc """
+  Puts a Notification inside message. It will be displayed in tray when app is in background.
+  """
+
+  def put_notification(message \\ %__MODULE__{}, title, body) do
+    %__MODULE__{message | notification: %{"title" => title, "body" => "body"}}
   end
 
   @doc """
   Puts a Notification inside message. It will be displayed in tray when app is in background.
   """
 
-  def put_notification(message \\ %__MODULE__{}, title, data) do
-    notification = %Notification{ title: title, body: data}
+  def put_notification(message \\ %__MODULE__{}, notification) do
     %__MODULE__{message | notification: notification}
   end
 

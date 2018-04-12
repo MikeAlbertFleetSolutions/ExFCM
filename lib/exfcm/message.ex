@@ -20,7 +20,7 @@ defmodule ExFCM.Message do
 
   require Logger
 
-  defstruct to: "", notification: nil, data: nil
+  defstruct to: "", notification: nil, data: nil, new_notification: nill
 
   @url Application.get_env(:exfcm, :fcm_url, "")
   @server_key Application.get_env(:exfcm, :server_key, "")
@@ -50,8 +50,8 @@ defmodule ExFCM.Message do
   Puts a Notification inside message. It will be displayed in tray when app is in background.
   """
 
-  def put_notification(message \\ %__MODULE__{}, notification) do
-    %__MODULE__{message | notification: notification}
+  def put_notification(message \\ %__MODULE__{}, new_notification) do
+    %__MODULE__{message | new_notification: new_notification}
   end
 
   @doc """

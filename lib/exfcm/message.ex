@@ -20,7 +20,7 @@ defmodule ExFCM.Message do
 
   require Logger
 
-  defstruct to: "", notification: nil, data: nil, new_notification: nill
+  defstruct to: "", notification: nil, data: nil, new_notification: nil
 
   @url Application.get_env(:exfcm, :fcm_url, "")
   @server_key Application.get_env(:exfcm, :server_key, "")

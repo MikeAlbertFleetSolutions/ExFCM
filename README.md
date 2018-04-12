@@ -7,7 +7,7 @@ Is a simple wrapper around Firebase Cloud Messaging that uses HTTPoison.
 ```elixir
 
 config :exfcm,
-  fcm_url: "https://fcm.googleapis.com/fcm/send"
+  fcm_url: "fcmHTTPRequestEndpoint"
   server_key: "yourKeyFromConsole"
 
 ```

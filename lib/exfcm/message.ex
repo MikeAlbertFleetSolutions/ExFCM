@@ -43,7 +43,7 @@ defmodule ExFCM.Message do
   """
 
   def put_notification(message \\ %__MODULE__{}, title, body) do
-    %__MODULE__{message | notification: %{"title" => title, "body" => "body"}}
+    %__MODULE__{message | notification: %{"title" => title, "body" => body}}
   end
 
   @doc """

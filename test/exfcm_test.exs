@@ -9,8 +9,9 @@ defmodule ExFCMTest do
   test "Sends message" do
     alias ExFCM.Message
 
-    {:ok , result } = Message.put_data(%{"sample" => "true"})
-    |> Message.put_notification("Tomasz","Cichocinski")
+    {:ok , result } = Message.put_data("sample", "true")
+    |> Message.put_notification("title","body")
+    |> Message.put_notification("sound","default")
     |> Message.target_topic("giveaways")
     |> Message.send
 

@@ -5,8 +5,8 @@ defmodule ExFCM.Message do
   To send a notification you have to provide a target using `target_device` (for a single device or group of devices) or using a `target_topic`.
   ## Examples
   ```
-  {:ok , result } = Message.put_data(%{"sample" => "true"})
-  |> Message.put_notification("Title","Description")
+  {:ok , result } = Message.put_data("sample", "true")
+  |> Message.put_notification("title","description")
   |> Message.target_topic("sample_giveaways")
   |> Message.send
   ```
@@ -14,32 +14,28 @@ defmodule ExFCM.Message do
 
   require Logger
 
-  defstruct to: "", notification: nil, data: nil
+  defstruct to: "", notification: %{}, data: %{}
 
   @url Application.get_env(:exfcm, :fcm_url, "")
   @server_key Application.get_env(:exfcm, :server_key, "")
 
-  defmodule Notification do
-    defstruct title: nil, body: nil
-  end
-
   @doc """
-  Puts a Notification inside message. It will be displayed in tray when app is in background.
+  Adds a field to Notification inside message. It will be displayed in tray when app is in background.
   """
 
-  def put_notification(message \\ %__MODULE__{}, title, data) do
-    notification = %Notification{ title: title, body: data}
+  def put_notification(message \\ %__MODULE__{}, key, data) do
+    notification = Map.put(message.notification, key, data)
     %__MODULE__{message | notification: notification}
   end
 
   @doc """
-  Puts a data fieldd into sending json, if it's present the `onMessageReceived` callback will be called on client.
+  Adds to the data field into sending json, if it's present the `onMessageReceived` callback will be called on client.
   """
 
-  def put_data(message \\ %__MODULE__{}, data) do
-    %__MODULE__{message | data: data}
-  end
-
+   def put_data(message \\ %__MODULE__{}, key, data) do
+       data = Map.put(message.data, key, data)
+       %__MODULE__{message | data: data}
+   end
 
   @doc """
   Sets target of notification. It should be either legal DeviceID obtained through a proper callback on client side and sent or a registered device group id.

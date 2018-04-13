@@ -15,8 +15,9 @@ config :exfcm,
 ## To send message to topic
 
 ```elixir
-{:ok , result } = Message.put_data(%{"sample" => "true"})
-    |> Message.put_notification("Github","is_awesome")
+{:ok , result } = Message.put_data("sample","true")
+    |> Message.put_notification("Title","Github")
+    |> Message.put_notification("body","is_awesome")    
     |> Message.target_topic("aTopic")
     |> Message.send
 ```
@@ -24,9 +25,10 @@ config :exfcm,
 ## To send message to device or device group
 
 ```elixir
-{:ok , result } = Message.put_data(%{"sample" => "true"})
-    |> Message.put_notification("Github","is_awesome")
-    |> Message.target_device("aTopic")
+{:ok , result } = Message.put_data("sample", "true")
+    |> Message.put_notification("title","Github")
+    |> Message.put_notification("body","is_awesome")
+    |> Message.target_device("deviceToken")
     |> Message.send
 ```
 

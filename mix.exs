@@ -21,7 +21,7 @@ defmodule ExFCM.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.13.0"},
+      {:httpoison, "~> 1.3"},
       {:poison, ">= 0.0.0"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
